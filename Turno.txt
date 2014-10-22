@@ -1,0 +1,65 @@
+/*
+ * Clase encargada de los procesos relativos a los turnos, asignación, etc.
+ */
+
+package procesos;
+
+/**
+ *
+ * @author FamiliaVargasMora
+ */
+import java.util.Random;
+public class Turno {
+
+    boolean primero;
+    boolean jugadorUno;
+    boolean jugadorDos;
+    Random rnd;
+    
+    public Turno(){
+    primero = true;
+    jugadorUno = false;
+    jugadorDos = false;
+    this.asignarTurno();
+    }
+    public void asignarTurno(){
+        int turno;
+        if(primero==true){      //Creamos un numero aleatorio entre 1 y 2
+            rnd = new Random(); //(int) (rnd.nextDouble() * cantidad_números_rango + término_inicial_rango)
+            turno = (int)(rnd.nextDouble()*2+1);
+            if(turno==1){
+                jugadorUno = true;
+            }
+            else{
+                jugadorDos = true;
+            }
+        }
+        else{
+            if(jugadorUno==true){
+                jugadorUno=false;
+                jugadorDos=true;
+            }
+            else{
+                jugadorDos=false;
+                jugadorUno=true;}
+        }
+        primero=false;
+    }
+    public boolean isJugadorUno() {
+        return jugadorUno;
+    }
+
+    public boolean isJugadorDos() {
+        return jugadorDos;
+    }
+//    public static void main(String[] args) {
+//        Turno t = new Turno();
+//        for (int i = 0; i < 10; i++) {
+//            t.asignarTurno();
+//            if(t.jugadorUno==true){System.out.println("1");}
+//            if(t.jugadorDos==true){System.out.println("2");}
+//        }
+//        
+//    }
+    
+}
